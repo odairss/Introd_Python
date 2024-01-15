@@ -18,5 +18,5 @@ for letra in string1:
         dicionario[letra] += 1
 
 for chave, valor in dicionario.items():
-    print(chave.upper() + ": %dx" % valor)
+    print(f'{chave.upper()}: {valor}x')
     
