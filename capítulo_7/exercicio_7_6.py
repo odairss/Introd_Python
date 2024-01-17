@@ -12,16 +12,24 @@ string_2 = input("Informe a segunda string: ")
 string_3 = input("Informe a terceira string: ")
 
 num = 0
-num1 = 0
 lista = list()
+char = 0
+confirma = True
 
 while num < len(string_1):
-    while num1 < len(string_2):
-        if string_1[num] == string_2[num1]:
-            lista.append(string_3[num1])
-        else:
-            lista.append(string_1[num])
-        num1 += 1
+    
+    if char >= len(string_3):
+        char = 0
+        
+    confirma = True
+    for letra in string_2:
+        if letra == string_1[num]:
+            lista.append(string_3[char])
+            char += 1
+            confirma = False
+            
+    if confirma:
+        lista.append(string_1[num])
     num += 1
 
 resultado = ''.join(lista)
