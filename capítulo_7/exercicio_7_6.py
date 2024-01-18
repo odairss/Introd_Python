@@ -2,8 +2,8 @@
 Exercício 7.6
 
 Programa que ler três strings e
-substitui pelos caracteres da terceira
-aqueles que se repetem na primeira e na segunda.
+substitui na primeira, pelos caracteres da terceira,
+aqueles que se repetem nas primeira e segunda strings.
 
 """
 
