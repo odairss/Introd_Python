@@ -18,11 +18,13 @@ palavras = ["pato", 'artesanato','sapato','marketing','piloto',
             'cachorro', 'universo', 'universal', 'universitário', 'universidade'
             'gato', 'gatuno', 'felino', 'proteína', 'carboidrato', 'aminoácidos']
 
+linhas = "X     -X     -X     ".split('-')
 
 for x in range(100):
-    linha2 = list("X     ")
-    linha3 = list("X     ")
-    linha4 = list("X     ")
+    linha2 = list(linhas[0])
+    linha3 = list(linhas[1])
+    linha4 = list(linhas[2])
+    
     numero = int(input("Informe um número: "))
     indice = (numero * 776) % len(palavras)
     print() # pulamos várias linhas para que o jogador não veja o que foi digitado como palavra. A ideia é que um jogador escreva uma palavra secreta, e que outro tente descobri-la.
