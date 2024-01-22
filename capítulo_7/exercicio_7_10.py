@@ -8,30 +8,33 @@ Um jogo da  velha para dois jogadores.
 jogo = [[' ',' ',' '],
         [' ',' ',' '],
         [' ',' ',' ']]
-jogadores = [1,2]
 
 casasescolhidas = list()
 
 jogadas = 0
+jogador = 0
+
+jogador1 = input("Nome do primeiro jogador: ")
+jogador2 = input("Nome do segundo jogador: ")
+
+jogadores = [jogador1,jogador2]
+
 
 while jogadas < 9:
-    
-    jogador = 0
-    
-    while jogador <= 1:
-        
-        casa = int(input("escolha uma casa vazia: "))
-        if casa not in casasescolhidas:
-            casasescolhidas.append(casa)
-        else:
-            print("Essa casa já está ocupada. Escolha outra casa!")
 
-        jogador += 1
-        
-    jogadas += 1
+    for jogador in jogadores:
+        casavazia = True
+        while casavazia:
+            casa = int(input(f"Sua vez de jogar {jogador}, escolha uma casa vazia: "))
+            if casa not in casasescolhidas:
+                casasescolhidas.append(casa)
+                casavazia = False
+                jogadas += 1
+            else:
+                casavazia = True
+                print(f"Essa casa já está ocupada {jogador},\nescolha outra casa!")
     
-    if jogadas == 8:
-        print("Terminou o jogo!")
+print("Terminou o jogo!")
 
 ##def jogo_da_velha():
 ##    
