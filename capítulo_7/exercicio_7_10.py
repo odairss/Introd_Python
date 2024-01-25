@@ -9,7 +9,7 @@ jogo = [[' ',' ',' '],
         [' ',' ',' '],
         [' ',' ',' ']]
 
-casasescolhidas = list()
+posicoesescolhidas = list()
 
 jogadas = 0
 jogador = 0
@@ -20,19 +20,20 @@ jogador2 = input("Nome do segundo jogador: ")
 jogadores = [jogador1,jogador2]
 
 
-while jogadas < 9:
+while jogadas < 9: ## itera 9 vezes permitindo que o jogo continue até que não exista mais posições marcadas
 
-    for jogador in jogadores:
-        casavazia = True
-        while casavazia:
-            casa = int(input(f"Sua vez de jogar {jogador}, escolha uma casa vazia: "))
-            if casa not in casasescolhidas:
-                casasescolhidas.append(casa)
-                casavazia = False
-                jogadas += 1
-            else:
-                casavazia = True
-                print(f"Essa casa já está ocupada {jogador},\nescolha outra casa!")
+    for jogador in jogadores: # itera entre os dois jogadores.
+        posicao = True # variável para verificar se a posição escolhida no tabuleiro não foi marcada ainda.
+        if jogadas <= 8: # controla para quando um dos jogadores completar as nove jogadas não seja permitido que o outro jogue.
+            while posicao: # verifica se a posição escolhida no tabuleiro está livre.
+                escolha = int(input(f"Sua vez de jogar {jogador}, escolha uma casa vazia: "))
+                if escolha not in posicoesescolhidas:
+                    posicoesescolhidas.append(escolha)
+                    posicao = False
+                    jogadas += 1
+                else:
+                    posicao = True
+                    print(f"Essa casa já está ocupada {jogador},\nescolha outra casa!")
     
 print("Terminou o jogo!")
 
