@@ -4,23 +4,44 @@ Exercício 7.10 da pág. 160.
 Um jogo da  velha para dois jogadores.
 
 """
+jogador1 = input("Nome do primeiro jogador: ")
+jogador2 = input("Nome do segundo jogador: ")
 
-indexes = [[1,2,3],
-        [4,5,6],
-        [7,8,9]]
-jogo = [[' ',' ',' '],
-        [' ',' ',' '],
-        [' ',' ',' ']]
+indexes = [[1,2,3], [4,5,6], [7,8,9]]
+tabuleiro = [[' ',' ',' '], [' ',' ',' '], [' ',' ',' ']]
 
-string_jogo = ''
+combinacoes_vencedoras = [[3,6,9],
+                          [2,5,8],
+                          [1,4,7],
+                          [4,5,6],
+                          [1,2,3],
+                          [1,5,9],
+                          [7,8,9],
+                          [3,5,7]]
+
+jogadas_jogador1 = [[0,0,0],
+                    [0,0,0],
+                    [0,0,0],
+                    [0,0,0],
+                    [0,0,0],
+                    [0,0,0],
+                    [0,0,0],
+                    [0,0,0]]
+
+jogadas_jogador2 = [[0,0,0],
+                    [0,0,0],
+                    [0,0,0],
+                    [0,0,0],
+                    [0,0,0],
+                    [0,0,0],
+                    [0,0,0],
+                    [0,0,0]]
 
 posicoesescolhidas = list()
 
 jogadas = 0
 jogador = 0
 
-jogador1 = input("Nome do primeiro jogador: ")
-jogador2 = input("Nome do segundo jogador: ")
 
 jogadores = [jogador1,jogador2]
 
@@ -38,23 +59,35 @@ while jogadas < 9: ## itera 9 vezes permitindo que o jogo continue até que não
                 if escolha not in posicoesescolhidas:
                     posicoesescolhidas.append(escolha)
                     posicoes_livres.remove(escolha)
+                    
                     if jogador == jogador1:
                         if escolha <= 3:
-                            jogo[0][indexes[0].index(escolha)] = 'x'
+                            tabuleiro[0][indexes[0].index(escolha)] = 'x'
+                            jogadas_jogador1[0][indexes[0].index(escolha)] = escolha
+##                            for jog1, comb in jogadas_jogador1, combinacoes_vencedoras:
+##                                if jog1 == comb:
+##                                    print(f"{jogador} ganhou!!")
+                            
                         elif escolha <= 6:
-                            jogo[1][indexes[1].index(escolha)] = 'x'
+                            tabuleiro[1][indexes[1].index(escolha)] = 'x'
+                            jogadas_jogador1[1][indexes[1].index(escolha)] = escolha
                         else:
-                            jogo[2][indexes[2].index(escolha)] = 'x'
+                            tabuleiro[2][indexes[2].index(escolha)] = 'x'
+                            jogadas_jogador1[2][indexes[2].index(escolha)] = escolha
+                            
                     elif jogador == jogador2:
                         if escolha <= 3:
-                            jogo[0][indexes[0].index(escolha)] = 'o'
+                            tabuleiro[0][indexes[0].index(escolha)] = 'o'
+                            jogadas_jogador2[0][indexes[0].index(escolha)] = escolha
                         elif escolha <= 6:
-                            jogo[1][indexes[1].index(escolha)] = 'o'
+                            tabuleiro[1][indexes[1].index(escolha)] = 'o'
+                            jogadas_jogador2[1][indexes[1].index(escolha)] = escolha
                         else:
-                            jogo[2][indexes[2].index(escolha)] = 'o'
+                            tabuleiro[2][indexes[2].index(escolha)] = 'o'
+                            jogadas_jogador2[2][indexes[2].index(escolha)] = escolha
                             
                     string_jogo = ''    
-                    for line in jogo:
+                    for line in tabuleiro:
                         for ln in line:
                             string_jogo += str(ln) + '|'
                         string_jogo += '\n-+-+-\n'
@@ -73,7 +106,15 @@ while jogadas < 9: ## itera 9 vezes permitindo que o jogo continue até que não
                     jogadas += 1
                 else:
                     posicao = True
-                    print(f"Essa posição já está ocupada {jogador},\nescolha uma das posições abaixo!")
+                    print(f"Essa posição já está ocupada {jogador},\nescolha uma das posições abaixo:")
                     print(posicoes_livres)
     
 print("Terminou o jogo!")
+print(f"Jogadas de {jogador1}")
+for jogadas in jogadas_jogador1:
+    print(jogadas)
+    print()
+print(f"Jogadas de {jogador2}")
+for jogadas in jogadas_jogador2:
+    print(jogadas)
+    print()
