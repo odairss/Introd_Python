@@ -42,35 +42,59 @@ def preenche_jog2(valor):
             jogadas_jogador2[num][indexe] = valor
         num += 1
 
-while jogadas < 9: ## itera 9 vezes permitindo que o jogo continue até que não exista mais posições marcadas
+def confere_se_ganhou(jogadas):
+    num = 0
+    result = True
+    
+    while num < 8:
+        if jogadas[num] == combinacoes_vencedoras[num]:
+            Result =  False
+            break
+        num += 1
+        
+    return result
+
+resultado = True
+
+while jogadas < 9 and resultado: ## itera 9 vezes permitindo que o jogo continue até que não exista mais posições marcadas
 
     for jogador in jogadores: # itera entre os dois jogadores.
+        
         posicao = True # variável para verificar se a posição escolhida no tabuleiro não foi marcada ainda.
+        
         if jogadas <= 8: # controla para quando um dos jogadores completar as nove jogadas não seja permitido que o outro jogue.
+            
             while posicao: # verifica se a posição escolhida no tabuleiro está livre.
+                
                 escolha = int(input(f"Sua vez de jogar {jogador},\nescolha uma posição vazia: "))
+                
                 if escolha not in posicoesescolhidas:
                     posicoesescolhidas.append(escolha)
                     posicoes_livres.remove(escolha)
                     
                     if jogador == jogador1:
-                        preenche_jog1(escolha)
                         if escolha <= 3:
                             tabuleiro[0][indexes[0].index(escolha)] = 'x'
                         elif escolha <= 6:
                             tabuleiro[1][indexes[1].index(escolha)] = 'x'
                         else:
                             tabuleiro[2][indexes[2].index(escolha)] = 'x'
-                            
+
+                        preenche_jog1(escolha)    
+                        resultado = confere_se_ganhou(jogadas_jogador1)
+                        
                     elif jogador == jogador2:
-                        preenche_jog2(escolha)
+                        
                         if escolha <= 3:
                             tabuleiro[0][indexes[0].index(escolha)] = 'o'
                         elif escolha <= 6:
                             tabuleiro[1][indexes[1].index(escolha)] = 'o'
                         else:
                             tabuleiro[2][indexes[2].index(escolha)] = 'o'
-                            
+
+                        preenche_jog2(escolha)
+                        resultado = confere_se_ganhou(jogadas_jogador2)
+                        
                     string_jogo = ''    
                     for line in tabuleiro:
                         for ln in line:
@@ -89,6 +113,7 @@ while jogadas < 9: ## itera 9 vezes permitindo que o jogo continue até que não
                     print(f"Posições livres até o momento: {livres}")
                     posicao = False
                     jogadas += 1
+                    
                 else:
                     posicao = True
                     print(f"Essa posição já está ocupada {jogador},\nescolha uma das posições abaixo:")
