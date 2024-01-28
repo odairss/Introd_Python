@@ -10,32 +10,11 @@ jogador2 = input("Nome do segundo jogador: ")
 indexes = [[1,2,3], [4,5,6], [7,8,9]]
 tabuleiro = [[' ',' ',' '], [' ',' ',' '], [' ',' ',' ']]
 
-combinacoes_vencedoras = [[3,6,9],
-                          [2,5,8],
-                          [1,4,7],
-                          [4,5,6],
-                          [1,2,3],
-                          [1,5,9],
-                          [7,8,9],
-                          [3,5,7]]
+combinacoes_vencedoras = [[3,6,9],[2,5,8],[1,4,7],[4,5,6],[1,2,3],[1,5,9],[7,8,9],[3,5,7]]
 
-jogadas_jogador1 = [[0,0,0],
-                    [0,0,0],
-                    [0,0,0],
-                    [0,0,0],
-                    [0,0,0],
-                    [0,0,0],
-                    [0,0,0],
-                    [0,0,0]]
+jogadas_jogador1 = [[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]]
 
-jogadas_jogador2 = [[0,0,0],
-                    [0,0,0],
-                    [0,0,0],
-                    [0,0,0],
-                    [0,0,0],
-                    [0,0,0],
-                    [0,0,0],
-                    [0,0,0]]
+jogadas_jogador2 = [[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]]
 
 posicoesescolhidas = list()
 
@@ -47,7 +26,21 @@ jogadores = [jogador1,jogador2]
 
 posicoes_livres = list(range(1,10))
 
+def preenche_jog1(valor):
+    num = 0
+    while num < 8:
+        if valor in combinacoes_vencedoras[num]:
+            indexe = combinacoes_vencedoras[num].index(valor)
+            jogadas_jogador1[num][indexe] = valor
+        num += 1
 
+def preenche_jog2(valor):
+    num = 0
+    while num < 8:
+        if valor in combinacoes_vencedoras[num]:
+            indexe = combinacoes_vencedoras[num].index(valor)
+            jogadas_jogador2[num][indexe] = valor
+        num += 1
 
 while jogadas < 9: ## itera 9 vezes permitindo que o jogo continue até que não exista mais posições marcadas
 
@@ -61,30 +54,22 @@ while jogadas < 9: ## itera 9 vezes permitindo que o jogo continue até que não
                     posicoes_livres.remove(escolha)
                     
                     if jogador == jogador1:
+                        preenche_jog1(escolha)
                         if escolha <= 3:
                             tabuleiro[0][indexes[0].index(escolha)] = 'x'
-                            jogadas_jogador1[0][indexes[0].index(escolha)] = escolha
-##                            for jog1, comb in jogadas_jogador1, combinacoes_vencedoras:
-##                                if jog1 == comb:
-##                                    print(f"{jogador} ganhou!!")
-                            
                         elif escolha <= 6:
                             tabuleiro[1][indexes[1].index(escolha)] = 'x'
-                            jogadas_jogador1[1][indexes[1].index(escolha)] = escolha
                         else:
                             tabuleiro[2][indexes[2].index(escolha)] = 'x'
-                            jogadas_jogador1[2][indexes[2].index(escolha)] = escolha
                             
                     elif jogador == jogador2:
+                        preenche_jog2(escolha)
                         if escolha <= 3:
                             tabuleiro[0][indexes[0].index(escolha)] = 'o'
-                            jogadas_jogador2[0][indexes[0].index(escolha)] = escolha
                         elif escolha <= 6:
                             tabuleiro[1][indexes[1].index(escolha)] = 'o'
-                            jogadas_jogador2[1][indexes[1].index(escolha)] = escolha
                         else:
                             tabuleiro[2][indexes[2].index(escolha)] = 'o'
-                            jogadas_jogador2[2][indexes[2].index(escolha)] = escolha
                             
                     string_jogo = ''    
                     for line in tabuleiro:
@@ -110,11 +95,3 @@ while jogadas < 9: ## itera 9 vezes permitindo que o jogo continue até que não
                     print(posicoes_livres)
     
 print("Terminou o jogo!")
-print(f"Jogadas de {jogador1}")
-for jogadas in jogadas_jogador1:
-    print(jogadas)
-    print()
-print(f"Jogadas de {jogador2}")
-for jogadas in jogadas_jogador2:
-    print(jogadas)
-    print()
