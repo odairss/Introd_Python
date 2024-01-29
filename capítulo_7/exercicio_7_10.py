@@ -26,6 +26,42 @@ jogadores = [jogador1,jogador2]
 
 posicoes_livres = list(range(1,10))
 
+def preenche_tabuleiro(esclh, jog):
+    if jog == 1:
+        if esclh <= 3:
+            tabuleiro[0][indexes[0].index(esclh)] = 'x'
+        elif esclh <= 6:
+            tabuleiro[1][indexes[1].index(esclh)] = 'x'
+        else:
+            tabuleiro[2][indexes[2].index(esclh)] = 'x'
+    elif jog == 2:
+        if esclh <= 3:
+            tabuleiro[0][indexes[0].index(esclh)] = 'o'
+        elif esclh <= 6:
+            tabuleiro[1][indexes[1].index(esclh)] = 'o'
+        else:
+            tabuleiro[2][indexes[2].index(esclh)] = 'o'     
+
+def formata_string():
+    string_jogo = ''  
+    for line in tabuleiro:
+        for ln in line:
+            string_jogo += str(ln) + '|'
+        string_jogo += '\n-+-+-\n'
+    print(string_jogo)
+
+def informa_posicoes_livres():
+    livres = ''
+    for position in posicoes_livres:
+        livres += ', ' + str(position)
+    print(f"Posições livres até o momento: {livres}")
+
+def informa_posicoes_ocupadas():
+    escolhidas = ''
+    for pos in posicoesescolhidas:
+        escolhidas += ', ' + str(pos)
+    print(f"Posições escolhidas até o momento: {escolhidas}")
+    
 def preenche_jog1(valor):
     num = 0
     while num < 8:
@@ -48,72 +84,36 @@ def confere_se_ganhou(jogadas):
     
     while num < 8:
         if jogadas[num] == combinacoes_vencedoras[num]:
-            Result =  False
-            break
+            print("É igual")
+            result =  False
         num += 1
-        
+    print(result)
     return result
 
 resultado = True
 
-while jogadas < 9 and resultado: ## itera 9 vezes permitindo que o jogo continue até que não exista mais posições marcadas
-
+while jogadas < 9 and resultado: ## itera até que alguém ganhe ou acabe o jogo.
     for jogador in jogadores: # itera entre os dois jogadores.
-        
         posicao = True # variável para verificar se a posição escolhida no tabuleiro não foi marcada ainda.
-        
         if jogadas <= 8: # controla para quando um dos jogadores completar as nove jogadas não seja permitido que o outro jogue.
-            
             while posicao: # verifica se a posição escolhida no tabuleiro está livre.
-                
                 escolha = int(input(f"Sua vez de jogar {jogador},\nescolha uma posição vazia: "))
-                
                 if escolha not in posicoesescolhidas:
                     posicoesescolhidas.append(escolha)
                     posicoes_livres.remove(escolha)
-                    
                     if jogador == jogador1:
-                        if escolha <= 3:
-                            tabuleiro[0][indexes[0].index(escolha)] = 'x'
-                        elif escolha <= 6:
-                            tabuleiro[1][indexes[1].index(escolha)] = 'x'
-                        else:
-                            tabuleiro[2][indexes[2].index(escolha)] = 'x'
-
+                        preenche_tabuleiro(escolha, 1)
                         preenche_jog1(escolha)    
                         resultado = confere_se_ganhou(jogadas_jogador1)
-                        
                     elif jogador == jogador2:
-                        
-                        if escolha <= 3:
-                            tabuleiro[0][indexes[0].index(escolha)] = 'o'
-                        elif escolha <= 6:
-                            tabuleiro[1][indexes[1].index(escolha)] = 'o'
-                        else:
-                            tabuleiro[2][indexes[2].index(escolha)] = 'o'
-
+                        preenche_tabuleiro(escolha, 2)
                         preenche_jog2(escolha)
                         resultado = confere_se_ganhou(jogadas_jogador2)
-                        
-                    string_jogo = ''    
-                    for line in tabuleiro:
-                        for ln in line:
-                            string_jogo += str(ln) + '|'
-                        string_jogo += '\n-+-+-\n'
-                    print(string_jogo)
-
-                    escolhidas = ''
-                    for pos in posicoesescolhidas:
-                        escolhidas += ', ' + str(pos)
-                    print(f"Posições escolhidas até o momento: {escolhidas}")
-
-                    livres = ''
-                    for position in posicoes_livres:
-                        livres += ', ' + str(position)
-                    print(f"Posições livres até o momento: {livres}")
+                    formata_string()
+                    informa_posicoes_ocupadas()
+                    informa_posicoes_livres()
                     posicao = False
                     jogadas += 1
-                    
                 else:
                     posicao = True
                     print(f"Essa posição já está ocupada {jogador},\nescolha uma das posições abaixo:")
