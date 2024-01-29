@@ -81,11 +81,11 @@ def preenche_jog2(valor):
 def confere_se_ganhou(jogadas):
     num = 0
     result = True
-    
     while num < 8:
         if jogadas[num] == combinacoes_vencedoras[num]:
             print("É igual")
             result =  False
+            break
         num += 1
     print(result)
     return result
@@ -95,7 +95,7 @@ resultado = True
 while jogadas < 9 and resultado: ## itera até que alguém ganhe ou acabe o jogo.
     for jogador in jogadores: # itera entre os dois jogadores.
         posicao = True # variável para verificar se a posição escolhida no tabuleiro não foi marcada ainda.
-        if jogadas <= 8: # controla para quando um dos jogadores completar as nove jogadas não seja permitido que o outro jogue.
+        if jogadas <= 8 and resultado: # controla para quando um dos jogadores completar as nove jogadas não seja permitido que o outro jogue.
             while posicao: # verifica se a posição escolhida no tabuleiro está livre.
                 escolha = int(input(f"Sua vez de jogar {jogador},\nescolha uma posição vazia: "))
                 if escolha not in posicoesescolhidas:
@@ -103,13 +103,19 @@ while jogadas < 9 and resultado: ## itera até que alguém ganhe ou acabe o jogo
                     posicoes_livres.remove(escolha)
                     if jogador == jogador1:
                         preenche_tabuleiro(escolha, 1)
-                        preenche_jog1(escolha)    
-                        resultado = confere_se_ganhou(jogadas_jogador1)
+                        preenche_jog1(escolha)
+                        formata_string()
+                        if not confere_se_ganhou(jogadas_jogador1):
+                            resultado = False
+                            break
                     elif jogador == jogador2:
                         preenche_tabuleiro(escolha, 2)
                         preenche_jog2(escolha)
-                        resultado = confere_se_ganhou(jogadas_jogador2)
-                    formata_string()
+                        formata_string()
+                        if not confere_se_ganhou(jogadas_jogador2):
+                            resultado = False
+                            break
+ #                   formata_string()
                     informa_posicoes_ocupadas()
                     informa_posicoes_livres()
                     posicao = False
