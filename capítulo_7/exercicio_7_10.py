@@ -47,7 +47,9 @@ def formata_string():
     for line in tabuleiro:
         for ln in line:
             string_jogo += str(ln) + '|'
+        string_jogo = string_jogo.rstrip('|')
         string_jogo += '\n-+-+-\n'
+    string_jogo = string_jogo[0:29].upper()
     print(string_jogo)
 
 def informa_posicoes_livres():
@@ -55,6 +57,7 @@ def informa_posicoes_livres():
     for position in posicoes_livres:
         livres += ', ' + str(position)
     print(f"Posições livres até o momento: {livres}")
+    print(":".rjust(50,':'))
 
 def informa_posicoes_ocupadas():
     escolhidas = ''
@@ -83,11 +86,9 @@ def confere_se_ganhou(jogadas):
     result = True
     while num < 8:
         if jogadas[num] == combinacoes_vencedoras[num]:
-            print("É igual")
             result =  False
             break
         num += 1
-    print(result)
     return result
 
 resultado = True
@@ -106,6 +107,7 @@ while jogadas < 9 and resultado: ## itera até que alguém ganhe ou acabe o jogo
                         preenche_jog1(escolha)
                         formata_string()
                         if not confere_se_ganhou(jogadas_jogador1):
+                            print(f"Parabéns {jogador}. Você ganhou o jogo!!".upper())
                             resultado = False
                             break
                     elif jogador == jogador2:
@@ -113,6 +115,7 @@ while jogadas < 9 and resultado: ## itera até que alguém ganhe ou acabe o jogo
                         preenche_jog2(escolha)
                         formata_string()
                         if not confere_se_ganhou(jogadas_jogador2):
+                            print(f"Parabéns {jogador}. Você ganhou o jogo!!".upper())
                             resultado = False
                             break
  #                   formata_string()
@@ -125,4 +128,5 @@ while jogadas < 9 and resultado: ## itera até que alguém ganhe ou acabe o jogo
                     print(f"Essa posição já está ocupada {jogador},\nescolha uma das posições abaixo:")
                     print(posicoes_livres)
     
-print("Terminou o jogo!")
+print()
+print("fim!".upper().center(10,':'))
