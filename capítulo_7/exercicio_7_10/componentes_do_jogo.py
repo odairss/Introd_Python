@@ -13,6 +13,7 @@ posicoesescolhidas = list()
 posicoes_livres = list(range(1,10))
 
 def preenche_tabuleiro(esclh, jog):
+    global tabuleiro
     if jog == 1:
         if esclh <= 3:
             tabuleiro[0][indexes[0].index(esclh)] = 'x'
@@ -52,6 +53,7 @@ def informa_posicoes_ocupadas():
     print(f"Posições escolhidas até o momento: {escolhidas}")
     
 def preenche_jog1(valor):
+    global jogadas_jogador1
     num = 0
     while num < 8:
         if valor in combinacoes_vencedoras[num]:
@@ -60,6 +62,7 @@ def preenche_jog1(valor):
         num += 1
 
 def preenche_jog2(valor):
+    global jogadas_jogador2
     num = 0
     while num < 8:
         if valor in combinacoes_vencedoras[num]:
