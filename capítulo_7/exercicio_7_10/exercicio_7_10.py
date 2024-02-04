@@ -23,14 +23,14 @@ while jogadas < 9 and resultado: ## itera até que alguém ganhe ou acabe o jogo
         if jogadas <= 8 and resultado: # controla para quando um dos jogadores completar as nove jogadas não seja permitido que o outro jogue.
             while posicao: # verifica se a posição escolhida no tabuleiro está livre.
                 escolha = int(input(f"Sua vez de jogar {jogador},\nescolha uma posição vazia: "))
-                if escolha not in posicoesescolhidas:
-                    posicoesescolhidas.append(escolha)
-                    posicoes_livres.remove(escolha)
+                if escolha not in POSICOESESCOLHIDAS:
+                    POSICOESESCOLHIDAS.append(escolha)
+                    POSICOES_LIVRES.remove(escolha)
                     if jogador == jogador1:
                         preenche_tabuleiro(escolha, 1)
                         preenche_jog1(escolha)
                         formata_string()
-                        if not confere_se_ganhou(jogadas_jogador1):
+                        if not confere_se_ganhou(JOGADAS_JOGADOR1):
                             print(f"Parabéns {jogador}. Você ganhou o jogo!!".upper())
                             resultado = False
                             break
@@ -38,7 +38,7 @@ while jogadas < 9 and resultado: ## itera até que alguém ganhe ou acabe o jogo
                         preenche_tabuleiro(escolha, 2)
                         preenche_jog2(escolha)
                         formata_string()
-                        if not confere_se_ganhou(jogadas_jogador2):
+                        if not confere_se_ganhou(JOGADAS_JOGADOR2):
                             print(f"Parabéns {jogador}. Você ganhou o jogo!!".upper())
                             resultado = False
                             break
@@ -49,7 +49,7 @@ while jogadas < 9 and resultado: ## itera até que alguém ganhe ou acabe o jogo
                 else:
                     posicao = True
                     print(f"Essa posição já está ocupada {jogador},\nescolha uma das posições abaixo:")
-                    print(posicoes_livres)
+                    print(POSICOES_LIVRES)
     
 print()
 print("fim!".upper().center(10,':'))

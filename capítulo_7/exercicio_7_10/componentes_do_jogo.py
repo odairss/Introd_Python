@@ -1,37 +1,37 @@
-indexes = [[1,2,3], [4,5,6], [7,8,9]]
-tabuleiro = [[' ',' ',' '], [' ',' ',' '], [' ',' ',' ']]
+INDEXES = [[1,2,3], [4,5,6], [7,8,9]]
+TABULEIRO = [[' ',' ',' '], [' ',' ',' '], [' ',' ',' ']]
 
-combinacoes_vencedoras = [[3,6,9],[2,5,8],[1,4,7],[4,5,6],[1,2,3],[1,5,9],[7,8,9],[3,5,7]]
+COMBINACOES_VENCEDORAS = [[3,6,9],[2,5,8],[1,4,7],[4,5,6],[1,2,3],[1,5,9],[7,8,9],[3,5,7]]
 
-jogadas_jogador1 = [[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]]
+JOGADAS_JOGADOR1 = [[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]]
 
-jogadas_jogador2 = [[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]]
+JOGADAS_JOGADOR2 = [[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]]
 
-posicoesescolhidas = list()
+POSICOESESCOLHIDAS = list()
 
 
-posicoes_livres = list(range(1,10))
+POSICOES_LIVRES = list(range(1,10))
 
 def preenche_tabuleiro(esclh, jog):
-    global tabuleiro
+    global TABULEIRO
     if jog == 1:
         if esclh <= 3:
-            tabuleiro[0][indexes[0].index(esclh)] = 'x'
+            TABULEIRO[0][INDEXES[0].index(esclh)] = 'x'
         elif esclh <= 6:
-            tabuleiro[1][indexes[1].index(esclh)] = 'x'
+            TABULEIRO[1][INDEXES[1].index(esclh)] = 'x'
         else:
-            tabuleiro[2][indexes[2].index(esclh)] = 'x'
+            TABULEIRO[2][INDEXES[2].index(esclh)] = 'x'
     elif jog == 2:
         if esclh <= 3:
-            tabuleiro[0][indexes[0].index(esclh)] = 'o'
+            TABULEIRO[0][INDEXES[0].index(esclh)] = 'o'
         elif esclh <= 6:
-            tabuleiro[1][indexes[1].index(esclh)] = 'o'
+            TABULEIRO[1][INDEXES[1].index(esclh)] = 'o'
         else:
-            tabuleiro[2][indexes[2].index(esclh)] = 'o'     
+            TABULEIRO[2][INDEXES[2].index(esclh)] = 'o'     
 
 def formata_string():
     string_jogo = ''  
-    for line in tabuleiro:
+    for line in TABULEIRO:
         for ln in line:
             string_jogo += str(ln) + '|'
         string_jogo = string_jogo.rstrip('|')
@@ -41,40 +41,40 @@ def formata_string():
 
 def informa_posicoes_livres():
     livres = ''
-    for position in posicoes_livres:
+    for position in POSICOES_LIVRES:
         livres += ', ' + str(position)
     print(f"Posições livres até o momento: {livres}")
     print(":".rjust(50,':'))
 
 def informa_posicoes_ocupadas():
     escolhidas = ''
-    for pos in posicoesescolhidas:
+    for pos in POSICOESESCOLHIDAS:
         escolhidas += ', ' + str(pos)
     print(f"Posições escolhidas até o momento: {escolhidas}")
     
 def preenche_jog1(valor):
-    global jogadas_jogador1
+    global JOGADAS_JOGADOR1
     num = 0
     while num < 8:
-        if valor in combinacoes_vencedoras[num]:
-            indexe = combinacoes_vencedoras[num].index(valor)
-            jogadas_jogador1[num][indexe] = valor
+        if valor in COMBINACOES_VENCEDORAS[num]:
+            indexe = COMBINACOES_VENCEDORAS[num].index(valor)
+            JOGADAS_JOGADOR1[num][indexe] = valor
         num += 1
 
 def preenche_jog2(valor):
-    global jogadas_jogador2
+    global JOGADAS_JOGADOR2
     num = 0
     while num < 8:
-        if valor in combinacoes_vencedoras[num]:
-            indexe = combinacoes_vencedoras[num].index(valor)
-            jogadas_jogador2[num][indexe] = valor
+        if valor in COMBINACOES_VENCEDORAS[num]:
+            indexe = COMBINACOES_VENCEDORAS[num].index(valor)
+            JOGADAS_JOGADOR2[num][indexe] = valor
         num += 1
 
 def confere_se_ganhou(jogadas):
     num = 0
     result = True
     while num < 8:
-        if jogadas[num] == combinacoes_vencedoras[num]:
+        if jogadas[num] == COMBINACOES_VENCEDORAS[num]:
             result =  False
             break
         num += 1
