@@ -37,3 +37,15 @@ while n < (valor-2):
     str_fibo += str(sucessor) + ', '
     n += 1
 print(str_fibo.rstrip(', '))
+
+# ===SOLUÇÃO DO CHAT GPT===
+def fibonacci(n):
+    fib_sequence = [0, 1]
+    for i in range(2, n):
+        fib_sequence.append(fib_sequence[i-1] + fib_sequence[i-2])
+    return fib_sequence
+
+# Teste
+n = int(input("Digite o número de termos da sequência Fibonacci desejados: "))
+fibonacci_sequence = fibonacci(n)
+print("A sequência de Fibonacci com", n, "termos é:", fibonacci_sequence)
