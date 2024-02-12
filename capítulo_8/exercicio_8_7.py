@@ -29,14 +29,17 @@ print("\n\nSOLUÇÃO ARRANJADA APÓS CONSULTAR O CHAT GPT:\n")
 
 a = int(input("Informe o valor de A: "))
 b = int(input("Informe o valor de B, onde B < A: "))
-
-def mdc_gpt(a,b):
+resto = 0
+def mdc_gpt():
+    global b
+    global a
+    global resto
     resto = a%b
     if resto > 0:
         a = b
         b = resto
-        mdc_gpt(a,b)
-    return resto
+        mdc_gpt()
+    return b
         
 
-print(f"O máximo divisor comum entre {a} e {b} é: {mdc_gpt(a,b)}")
+print(f"O máximo divisor comum entre {a} e {b} é: {mdc_gpt()}")
