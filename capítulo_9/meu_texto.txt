@@ -1,0 +1,6 @@
+Vejamos o programa da listagem 9.4, que gera dois arquivos com 500 linhas cada.
+O programa distribui os números ímpares e pares em arquivos diferentes.
+Observe que para gravar em arquivos diferentes, utilizamos um if e dois arquivos
+abertos para escrita. Utilizando o método write dos objetos pares e ímpares,
+fizemos a seleção de onde gravar o número. Observe que incluímos o \n para
+indicar fim de linha.
