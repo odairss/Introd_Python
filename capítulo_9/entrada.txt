@@ -1,0 +1,8 @@
+;Esta linha não deve ser impressa.
+>Esta linha deve ser impressa alinhda a direita
+. Esta linha inicia com .
+*Esta linha deve ser centralizada
+. Esta linha também inicia com .
+Uma linha normal
+Outra linha normal
+=Uma linha com sinal de igual.
