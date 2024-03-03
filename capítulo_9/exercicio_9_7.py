@@ -8,16 +8,14 @@ pág. 194
 """
 
 NUM_PAGINA = 1
-TAMANHO = 0
 NUM = 1
 
 lorem_ipsum = open('lorem_ipsum.txt')
 lorem_ipsum_paginado = open('lorem_ipsum_paginado.txt','w')
 
 def main():
-    global NUM, TAMANHO, NUM_PAGINA
+    global NUM, NUM_PAGINA
     for line in lorem_ipsum.readlines():
-        TAMANHO = len(line)
         while len(line) > 76:
             if NUM > 60:
                 ultima_linha = '\n'
@@ -27,8 +25,7 @@ def main():
                 NUM = 1
             else:
                 linha = line[:76]
-                line = line[76:TAMANHO]
-                TAMANHO = len(line)
+                line = line[76:len(line)]
                 lorem_ipsum_paginado.write('{0:>2}'.format(str(NUM))+'| '+linha+'\n')
                 NUM += 1      
             
