@@ -31,37 +31,38 @@ def numerar_linha(ln):
     NUM += 1
     return [tx,ln]
 
-##def configurar_pagina(linha):
-##    global TEXTO
-##    if len(linha) > 76:
-##        if NUM > 60:
-##            TEXTO += numerar_pagina()
-##        else:
-##            tx_sbr = numerar_linha(linha)
-##            linha = tx_sbr[1]
-##            TEXTO += tx_sbr[0]
-##        configurar_pagina(linha)
-##    return [TEXTO, linha]
+def se_linha_grande(linha_g):
+    global TEXTO
+    while len(linha_g) > 76:
+        if NUM > 60:
+            TEXTO += numerar_pagina()
+        else:
+            tx_sbr = numerar_linha(linha_g)
+            linha_g = tx_sbr[1]
+            TEXTO += tx_sbr[0]
+    return [TEXTO, linha_g]
+
+def se_linha_pequena(linha_p):
+    global NUM
+    tx = ''
+    if len(linha_p) <= 76:
+        if NUM > 60:
+            tx = numerar_pagina()
+            tx += '{0:>2}'.format(str(NUM))+'| '+linha_p
+            NUM += 1
+        else:
+            tx = '{0:>2}'.format(str(NUM))+'| '+linha_p
+            NUM += 1
+    return tx
 
 def main():
-    global NUM
+    global TEXTO
     for line in lorem_ipsum.readlines():
-        while len(line) > 76:
-            if NUM > 60:
-                lorem_ipsum_paginado.write(numerar_pagina())
-            else:
-                tx_sbr = numerar_linha(line)
-                line = tx_sbr[1]
-                lorem_ipsum_paginado.write(tx_sbr[0])    
-            
-        if len(line) <= 76:
-            if NUM > 60:
-                lorem_ipsum_paginado.write(numerar_pagina())
-                lorem_ipsum_paginado.write('{0:>2}'.format(str(NUM))+'| '+line)
-                NUM += 1
-            else:
-                lorem_ipsum_paginado.write('{0:>2}'.format(str(NUM))+'| '+line)
-                NUM += 1
+        TEXTO = ''
+        result = se_linha_grande(line)
+        lorem_ipsum_paginado.write(result[0])
+        line = result[1]
+        lorem_ipsum_paginado.write(se_linha_pequena(line))
                 
     ultima_linha = '\n'
     ultima_linha += f'{NUM_PAGINA}\n\n'.rjust(81,'.')
