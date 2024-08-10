@@ -1,6 +1,5 @@
 """
-Exercício 9.12 - Modifica o programa da questão 9.11 para registrar a linha
-e a coluna de cada ocorrência da palavra no arquivo.
+Exercício 9.12 - Modifica o programa da questão 9.11 para registrar a linha e a coluna de cada ocorrência da palavra no arquivo.
 
 pág. 195
 
