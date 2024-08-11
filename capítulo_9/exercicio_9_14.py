@@ -12,6 +12,7 @@ import sys
 file_name = sys.argv[1]
 
 file = open(file_name, 'r')
+new_file = open('exercicio_9_14.txt', 'w')
 
 list_words = list()
 
@@ -22,8 +23,8 @@ for ln in file.readlines():
 text_cleared = ''
 
 for lista in list_words:
-    text_cleared += ' '.join(lista)
-    text_cleared += '\n'
+    new_file.write(' '.join(lista))
+    new_file.write('\n\n')
 
-print(text_cleared)
 file.close()
+new_file.close()
