@@ -20,8 +20,6 @@ for ln in file.readlines():
     if len(ln) > 1:
         list_words.append(ln.split())
 
-text_cleared = ''
-
 for lista in list_words:
     new_file.write(' '.join(lista))
     new_file.write('\n\n')
