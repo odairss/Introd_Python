@@ -20,65 +20,75 @@ for word in palavras_gravadas.readlines():
 lista_com_um = random.sample(range(0,56),1)
 palavra = palavras[lista_com_um[0]].lower()
 
-for x in range(100):
+jogadores = list()
+
+for x in range(5):
+    jogador = input(f"Nome do {x+1}º competidor: ")
+    jogadores.append(jogador)
+print('*'*35)    
+for jogador in jogadores:
     digitadas = []
     acertos = []
     erros = 0
-    while True:
-        senha = ""
-        for letra in palavra:
-            senha += letra if letra in acertos else "." # decidir o valor a retornar, dependendo de uma condição.
-        print(senha)
+    contador = 0
+    while contador < 5:
+        contador += 1
+        while True:
+            print(f"Sua {contador}º tantativa {jogador}:")
+            senha = ""
+            for letra in palavra:
+                senha += letra if letra in acertos else "." # decidir o valor a retornar, dependendo de uma condição.
+            print(senha)
 
-        if senha == palavra:
-            print("Você acertou!")
-            lista_com_um = random.sample(range(0,56),1)
-            palavra = palavras[lista_com_um[0]].lower()
-            digitadas = []
-            acertos = []
-            erros = 0
-            break
-        
-        tentativa = input("\nDigite uma letra: ").lower().strip()
-        if tentativa in digitadas:
-            print("Você já tentou esta letra!")
-            continue # ignorar todas as linhas até o fim da repetição e voltar para o início, sem terminá-la.
-        else:
-            digitadas += tentativa
-            if tentativa in palavra:
-                acertos += tentativa
-            else:
-                erros += 1
-                print("Você errou!")
-        print("X==:==\nX  :  ")
-        print("X  0  " if erros >= 1 else "X")
-        linha2 = ""
-        if erros == 2:
-            linha2 = "  |  "
-        elif erros == 3:
-            linha2 = " \| "
-        elif erros == 4:
-            linha2 = " \|/ "
+            if senha == palavra:
+                print("Você acertou!")
+                lista_com_um = random.sample(range(0,56),1)
+                palavra = palavras[lista_com_um[0]].lower()
+                digitadas = []
+                acertos = []
+                erros = 0
+                break
             
-        print("X%s" % linha2)
+            tentativa = input("\nDigite uma letra: ").lower().strip()
+            if tentativa in digitadas:
+                print("Você já tentou esta letra!")
+                continue # ignorar todas as linhas até o fim da repetição e voltar para o início, sem terminá-la.
+            else:
+                digitadas += tentativa
+                if tentativa in palavra:
+                    acertos += tentativa
+                else:
+                    erros += 1
+                    print("Você errou!")
+            print("X==:==\nX  :  ")
+            print("X  0  " if erros >= 1 else "X")
+            linha2 = ""
+            if erros == 2:
+                linha2 = "  |  "
+            elif erros == 3:
+                linha2 = " \| "
+            elif erros >= 4:
+                linha2 = " \|/ "
+                
+            print("X%s" % linha2)
 
-        linha3 = ""
+            linha3 = ""
 
-        if erros == 5:
-            linha3 = " /  "
-        elif erros >= 6:
-            linha3 = " / \ "
+            if erros == 5:
+                linha3 = "  :\nX /  "
+            elif erros >= 6:
+                linha3 = "  :\nX / \ "
 
-        print("X%s" % linha3)
-        print("X\n===========")
+            print("X%s" % linha3)
+            print("X\n===========")
 
-        if erros == 6:
-            print("Enforcado!")
-            lista_com_um = random.sample(range(0,56),1)
-            palavra = palavras[lista_com_um[0]].lower()
-            digitadas = []
-            acertos = []
-            erros = 0
-            break
+            if erros == 6:
+                print("Enforcado!")
+                lista_com_um = random.sample(range(0,56),1)
+                palavra = palavras[lista_com_um[0]].lower()
+                digitadas = []
+                acertos = []
+                erros = 0
+                break
 
 palavras_gravadas.close()

@@ -37,7 +37,7 @@ for x in range(100):
             linha2 = "  |  "
         elif erros == 3:
             linha2 = " \| "
-        elif erros == 4:
+        elif erros >= 4:
             linha2 = " \|/ "
             
         print("X%s" % linha2)
@@ -45,9 +45,9 @@ for x in range(100):
         linha3 = ""
 
         if erros == 5:
-            linha3 = " /  "
+            linha3 = "  :\nX /  "
         elif erros >= 6:
-            linha3 = " / \ "
+            linha3 = "  :\nX / \ "
 
         print("X%s" % linha3)
         print("X\n===========")
